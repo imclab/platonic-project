@@ -1,4 +1,5 @@
 extends includes/layout
+include mixins/ui_components
 include mixins/geometry
 
 block css
@@ -7,6 +8,7 @@ block css
 
 block scene
 
+    mixin display-axis(0)
     mixin cube(0, 1)
 
     
