@@ -1,0 +1,56 @@
+
+//- Quad
+//- 
+//- @param mesh-id
+//- @param light
+
+mixin quad(mesh_id, light)
+    - light = light || 0
+    .mesh.quad(data-mesh-id="#{mesh_id}", data-light="#{light}")
+        .face(data-face-id="0")
+
+
+//- Triangle
+//- 
+//- @param mesh-id
+//- @param light
+
+mixin triangle(mesh_id, light)
+    - light = light || 0
+    .mesh.triangle(data-mesh-id="#{mesh_id}", data-light="#{light}")
+        .face(data-face-id="0")
+
+
+//- Plane
+//- 
+//- @param mesh-id
+//- @param light
+
+mixin plane(mesh_id, light)
+    - light = light || 0
+    .mesh.plane(data-mesh-id="#{mesh_id}", data-light="#{light}")
+        .face(data-face-id="0")
+
+
+//- Plane
+//- 
+//- @param mesh-id
+//- @param light
+
+mixin cube(mesh_id, light)
+    - light = light || 0
+    .mesh.cube(data-mesh-id="#{mesh_id}", data-light="#{light}")
+        - for(i = 0; i < 6; i++)
+            .face(data-face-id="#{i}")
+
+
+//- Pyramid
+//- 
+//- @param mesh-id
+//- @param light
+
+mixin pyramid(mesh_id, light)
+    - light = light || 0
+    .mesh.pyramid(data-mesh-id="#{mesh_id}", data-light="#{light}")
+        - for(i = 0; i < 5; i++)
+            .face(data-face-id="#{i}")
