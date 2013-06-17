@@ -5,8 +5,14 @@ global-reset()
 
 .platonic-viewport .scene
 
-    .ui-components.grid
-        grid()
+    .ui-component
+
+        &.grid
+            grid()
+
+        &.display-axis
+            display-axis(component-id: 1)
+            z-index: 1
 
     .mesh
 
