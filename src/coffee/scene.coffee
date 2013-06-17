@@ -36,7 +36,7 @@ class Scene
         cam_settings.add(@cam, 'reset' )
         cam_settings.open()
 
-        ## Events
+        # Events
         @$window.resize => @on_resize()
         @$window.trigger 'resize'
 
