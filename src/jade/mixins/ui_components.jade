@@ -1,7 +1,7 @@
 
 //- Grid
 
-mixin grid(mesh_id, light, camera)
+mixin grid(id, light, camera)
     - id     = id     || 0
     - light  = light  || 0
     - camera = camera || 0
@@ -15,7 +15,7 @@ mixin display-axis(id, light, camera)
     - id     = id     || 0
     - light  = light  || 0
     - camera = camera || 0
-    .ui-component.display-axis(data-component-id="#{id}", data-light="0", data-camera-transform="#{camera})
+    .ui-component.display-axis(data-component-id="#{id}", data-light="0", data-camera-transform="#{camera}")
         .axis.x
         .axis.y
         .axis.z
