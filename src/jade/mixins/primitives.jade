@@ -1,24 +1,4 @@
 
-//- Quad
-
-mixin quad(id, light, camera)
-    - id     = id     || 0
-    - light  = light  || 0
-    - camera = camera || 0
-    .mesh.quad(data-mesh-id="#{id}", data-light="#{light}", data-camera-transform="#{camera}")
-        .face(data-face-id="0")
-
-
-//- Triangle
-
-mixin triangle(id, light, camera)
-    - id     = id     || 0
-    - light  = light  || 0
-    - camera = camera || 0
-    .mesh.triangle(data-mesh-id="#{id}", data-light="#{light}", data-camera-transform="#{camera}")
-        .face(data-face-id="0")
-
-
 //- Plane
 
 mixin plane(id, light, camera)
@@ -27,7 +7,6 @@ mixin plane(id, light, camera)
     - camera = camera || 0
     .mesh.plane(data-mesh-id="#{id}", data-light="#{light}", data-camera-transform="#{camera}")
         .face(data-face-id="0")
-
 
 //- Plane
 
@@ -38,7 +17,6 @@ mixin cube(id, light, camera)
     .mesh.cube(data-mesh-id="#{id}", data-light="#{light}", data-camera-transform="#{camera}")
         - for(i = 0; i < 6; i++)
             .face(data-face-id="#{i}")
-
 
 //- Pyramid
 

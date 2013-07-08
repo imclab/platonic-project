@@ -16,6 +16,6 @@ mixin display-axis(id, light, camera)
     - light  = light  || 0
     - camera = camera || 0
     .ui-component.display-axis(data-component-id="#{id}", data-light="0", data-camera-transform="#{camera}")
-        .axis.x
-        .axis.y
-        .axis.z
+        .mesh.line.x
+        .mesh.line.y
+        .mesh.line.z
