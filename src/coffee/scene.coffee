@@ -1,11 +1,19 @@
 
-window.log = (args...) => console?.log args...
+window.log = (args...) => console?.log args...    
 
 class Scene
 
+    stats : {
+        groups         : 0
+        meshes         : 0
+        faces          : 0
+        photon_shaders : 0
+        ui_components  : 0 
+    }
+
     constructor: ->
 
-        @$window = $(window)
+        @$window   = $(window)
 
         # Viewport
         @$viewport = $ '.platonic-viewport'
@@ -17,35 +25,45 @@ class Scene
 
         # Define facegroups
         $('.group:not(.mesh > .group):not([data-light="0"]), .mesh:not(.group > .mesh):not([data-light="0"])').each (index, element) =>
-            face_group = new Photon.FaceGroup($(element)[0], $(element).find '.face', 0.8, 0.1, true)
+            face_group = new Photon.FaceGroup($(element)[0], $(element).find('.face'), 0.8, 0.1, true)
             @face_groups.push face_group
 
         # Add camera
         @cam = new Camera @$viewport
 
         # Stats
-        @stats = new Stats()
-        @$viewport.append @stats.domElement
+        @fps = new Stats()
+        @$viewport.append @fps.domElement
+
+        @stats.groups         = $('.group').length
+        @stats.meshes         = $('.mesh').length
+        @stats.faces          = $('.face').length
+        @stats.photon_shaders = $('.photon-shader').length
+        @stats.ui_components  = $('.ui-component').length
 
         # GUI
         @gui = new dat.GUI()
+
+        scene_stats = @gui.addFolder 'Scene'
+        scene_stats.add(@stats, 'groups').listen()
+        scene_stats.add(@stats, 'meshes').listen()
+        scene_stats.add(@stats, 'faces').listen()
+        scene_stats.add(@stats, 'photon_shaders').listen()
+        scene_stats.add(@stats, 'ui_components').listen()
+        # scene_stats.open()
+
         cam_settings = @gui.addFolder 'Camera'
         cam_settings.add @cam, 'perspective', 0, 2000
-        cam_settings.add(@cam, 'rotation_x' ).listen()
-        cam_settings.add(@cam, 'rotation_y' ).listen()
-        cam_settings.add(@cam, 'reset' )
-        cam_settings.open()
+        cam_settings.add(@cam, 'rotation_x').listen()
+        cam_settings.add(@cam, 'rotation_y').listen()
+        cam_settings.add(@cam, 'reset')
+        # cam_settings.open()
 
         # Events
         @$window.resize => @on_resize()
         @$window.trigger 'resize'
 
         @loop()
-
-
-    ###
-    On window resize
-    ###
 
     on_resize: ->
 
@@ -57,13 +75,10 @@ class Scene
 
         @cam.resize()
 
-    ###
-    Update on request animation frame
-    ###
 
     update: ->
 
-        @stats.begin()
+        @fps.begin()
 
         # Update cam
         @cam.update()
@@ -71,19 +86,14 @@ class Scene
         # Update lighting
         if @face_groups.length > 0
             for face_group in @face_groups
-                face_group.render @light, true
+                face_group.render(@light, true)
 
-        @stats.end()
+        @fps.end()
 
-
-    ###
-    Request animation frame tick
-    ###
 
     loop: =>
 
         @update()
-        requestAnimationFrame @loop
-
+        requestAnimationFrame(@loop)
 
 $ -> scene = new Scene()
