@@ -6,6 +6,7 @@ A simple project scaffold for [Stylus Platonic](https://github.com/davidpaulross
 
 ```
 git clone git@github.com:davidpaulrosser/platonic-project.git
+cd platonic-project && sudo npm install
 ```
 
 ## Features
